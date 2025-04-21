@@ -16,7 +16,6 @@ const newUser: User = {
     id: 1,
     name: "Rohit",
     isAdmin: true,
-    email: "example@gmail.com",
 };
 
 console.log(greet(newUser)); // Output: Hello, Rohit, isAdmin: true!
