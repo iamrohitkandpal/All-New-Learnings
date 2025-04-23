@@ -1,4 +1,4 @@
-import { addTodo, removeTodo, getTodos } from "./todo";
+import { addTodo, removeTodo, getTodos } from "./todo.js"; // Note the .js extension
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector<HTMLFormElement>("#todo-form");
