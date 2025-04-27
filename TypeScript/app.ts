@@ -167,20 +167,20 @@ abcdef("John", "Male");                          // Optional Parameter
 
 // Rest Parameters //
 function sum(...arr: number[]) {                 // Rest Parameter
-    let total = arr.reduce((a,b) => a + b, 0);
+    let total = arr.reduce((a, b) => a + b, 0);
     console.log(total);
 }
-sum(1, 2, 3, 4, 5);                    
+sum(1, 2, 3, 4, 5);
 
 
 // Function Overloading //
 function abd(a: string): void;
 function abd(a: string, b: number): number;
 function abd(a: any, b?: any): any {
-    if(typeof a === "string" && b === undefined) {
+    if (typeof a === "string" && b === undefined) {
         console.log(a);
     }
-    else if(typeof a === "string" && typeof b === "number") {
+    else if (typeof a === "string" && typeof b === "number") {
         return a.length + b;
     }
 }
@@ -199,14 +199,70 @@ interface Halwa<T> {                   // Generic Interface
     price: number;
     key: T
 }
-function getHalwa(obj: Halwa<string>) {};
+function getHalwa(obj: Halwa<string>) { };
 getHalwa({ name: "Lauki Kalwa", price: 200, key: "Lauki" });
 
 class BatliMaker<T> {                  // Generic Classes
-    constructor(public key: T) {}
+    constructor(public key: T) { }
 }
 let bt1 = new BatliMaker("NewBatli");
 let bt2 = new BatliMaker(1000);
 
 
-// Modules //
+// Type Assertions & Casting //
+let ne: any = 12;
+(ne as number).toString();             // Type Assertion
+<number>ne;
+
+let bo: null | undefined | string;
+bo = "Hey";
+a!.toFixed(2);                         // Non-null Assertion Operator
+bo?.toString();                        // Optional Chaining Operator
+
+
+// Type Guards //
+function guard(arg: string | number) {
+    if (typeof arg === "string") {
+        console.log(arg.length);            // Type Guard
+    }
+    else if (typeof arg === "number") {
+        console.log(arg.toFixed(2));        // Type Guard
+    }
+    else {
+        throw new Error("Paagal ho Kya");
+    }
+}
+guard(12);
+guard("Hello");
+// guard(true);                          
+
+
+// Type Narrowing //
+class Remote {
+    switchoff() {
+        console.log("Switch Off");
+    }
+
+}
+class CarKaRemote {
+    swtchoff() {
+        console.log("Car Switch Off");
+    }
+}
+const tv = new Remote();
+const car = new CarKaRemote();
+
+function switchOffKaro(device: Remote | CarKaRemote) {
+    if(device instanceof Remote) {
+        device.switchoff();                  // Type Guard with instanceof
+    }
+    else if(device instanceof CarKaRemote) {
+        device.swtchoff();                   // Type Guard with instanceof
+    }
+    else {
+        throw new Error("Paagal ho Kya Remote Kaha hai");
+    }
+}
+switchOffKaro(tv);
+switchOffKaro(car);
+
